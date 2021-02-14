@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<priceQuote xmlns="http://www.example.org/price">
+	<customerName>Acme Inc</customerName>
+	<shipAddress street="12 Springs Rd" city="Morris Plains" state="nj" zip="07960"/>
+	<priceRequests>
+		<priceRequest>
+			<widgetId>12</widgetId>
+			<price>1.00</price>	
+		</priceRequest>
+		<priceRequest>
+			<widgetId>134</widgetId>
+			<price>34.10</price>	
+		</priceRequest>
+		<priceRequest>
+			<widgetId>211</widgetId>
+			<price>10.00</price>	
+		</priceRequest>
+	</priceRequests>
+</priceQuote>

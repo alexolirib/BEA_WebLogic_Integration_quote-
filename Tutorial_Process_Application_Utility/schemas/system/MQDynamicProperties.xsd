@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<xs:schema xmlns="http://www.bea.com/wli/control/MQDynamicProperties" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bea.com/wli/control/MQDynamicProperties" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="MQDynamicProperties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="connectionType" type="connType" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="queueManager" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="requireAuthorization" type="authType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="host" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="port" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="channel" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ccsid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="user" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="sendExit" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="receiveExit" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="securityExit" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="defaultQueueName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="implicitTransactionRequired" type="transType" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="connType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Bindings"></xs:enumeration>
+			<xs:enumeration value="TCP"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="authType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Yes"></xs:enumeration>
+			<xs:enumeration value="No"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+    <xs:simpleType name="transType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="true"></xs:enumeration>
+			<xs:enumeration value="false"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>	
+</xs:schema>

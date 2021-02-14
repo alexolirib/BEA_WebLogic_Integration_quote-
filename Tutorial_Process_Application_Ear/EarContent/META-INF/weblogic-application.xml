@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wls="http://www.bea.com/ns/weblogic/90" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-application.xsd">
+  <wls:ejb>
+    <wls:start-mdbs-with-application>false</wls:start-mdbs-with-application>
+  </wls:ejb>
+  <wls:application-param>
+    <wls:param-name>webapp.encoding.default</wls:param-name>
+    <wls:param-value>UTF-8</wls:param-value>
+  </wls:application-param>
+  <wls:classloader-structure>
+    <wls:classloader-structure>
+      <wls:module-ref>
+        <wls:module-uri>Tutorial_Process_Application_Web.war</wls:module-uri>
+      </wls:module-ref>
+      <wls:classloader-structure>
+        <wls:module-ref>
+          <wls:module-uri>Tutorial_Process_Application_Web_WLI_ProjectBeans</wls:module-uri>
+        </wls:module-ref>
+      </wls:classloader-structure>
+      <wls:classloader-structure>
+        <wls:module-ref>
+          <wls:module-uri>Tutorial_Process_Application_Web_WLI_ComponentBeans</wls:module-uri>
+        </wls:module-ref>
+      </wls:classloader-structure>
+    </wls:classloader-structure>
+  </wls:classloader-structure>
+  <wls:listener>
+    <wls:listener-class>com.bea.wli.management.WLIAppListener</wls:listener-class>
+  </wls:listener>
+  <wls:library-ref>
+    <wls:library-name>beehive-controls-1.0</wls:library-name>
+    <wls:specification-version>1.0</wls:specification-version>
+    <wls:implementation-version>1.0</wls:implementation-version>
+  </wls:library-ref>
+  <wls:library-ref>
+    <wls:library-name>wls-commonslogging-bridge</wls:library-name>
+    <wls:specification-version>1.0</wls:specification-version>
+    <wls:implementation-version>1.0</wls:implementation-version>
+  </wls:library-ref>
+  <wls:library-ref>
+    <wls:library-name>weblogic-controls-1.0</wls:library-name>
+    <wls:specification-version>1.0</wls:specification-version>
+    <wls:implementation-version>1.0</wls:implementation-version>
+  </wls:library-ref>
+</wls:weblogic-application>

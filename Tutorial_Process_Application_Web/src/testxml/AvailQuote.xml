@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<availQuote xmlns="http://www.example.org/avail">
+	<availRequest>
+		<widgetId>12</widgetId>
+		<requestedQuantity>10</requestedQuantity>
+		<quantityAvail>true</quantityAvail>
+		<shipDate>2003-03-22</shipDate>
+	</availRequest>
+	<availRequest>
+		<widgetId>134</widgetId>
+		<requestedQuantity>345</requestedQuantity>
+		<quantityAvail>false</quantityAvail>
+		<shipDate>BackOrder</shipDate>
+	</availRequest>
+	<availRequest>
+		<widgetId>211</widgetId>
+		<requestedQuantity>100</requestedQuantity>
+		<quantityAvail>true</quantityAvail>
+		<shipDate>2003-04-21</shipDate>
+	</availRequest>
+</availQuote>

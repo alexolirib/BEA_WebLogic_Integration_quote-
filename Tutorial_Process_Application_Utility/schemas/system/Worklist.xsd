@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.bea.com/wli/worklist/xml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/wli/worklist/xml" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="TaskCreationXML" type="TaskCreationXMLType">
+	</xs:element>
+
+  <xs:complexType name="TaskCreationXMLType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="comment" type="xs:string" minOccurs="0"/>
+      <xs:element name="priority" type="xs:int" minOccurs="0"/>
+      <xs:choice minOccurs="0">
+        <xs:element name="claimDueDate" type="xs:dateTime"/>
+        <xs:element name="claimDueBusinessDate" type="businessDateType"/>
+      </xs:choice>
+      <xs:choice minOccurs="0">
+        <xs:element name="completionDueDate" type="xs:dateTime"/>
+        <xs:element name="completionDueBusinessDate" type="businessDateType"/>
+      </xs:choice>
+      <xs:element name="owner" type="xs:string" minOccurs="0"/>
+      <xs:element name="canBeReassigned" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="canBeAborted" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="canBeReturned" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="assignee" type="assigneeType" minOccurs="0"/>
+      <xs:element name="request" type="messageType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="TaskConstructionXML">
+		<xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TaskCreationXMLType">
+          <xs:sequence>
+
+            <!-- 9.0 Worklist Model Fields -->
+
+            <xs:element name="taskPlanId" type="xs:string" minOccurs="0"/>
+            <xs:element name="creatingContainerHandle" type="containerHandleType" minOccurs="0"/>
+            <xs:element name="creationDate" type="xs:dateTime"/>
+            <xs:choice minOccurs="0">
+              <xs:element name="currentStepCompletionDueDate" type="xs:dateTime"/>
+              <xs:element name="currentStepCompletionDueBusinessDate" type="businessDateType"/>
+            </xs:choice>
+            <xs:element name="taskTimeEstimate" type="xs:string" minOccurs="0"/>
+            <xs:element name="stepTimeEstimate" type="stepTimeEstimateType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="assignmentInstructions" type="assignmentInstructionsType" minOccurs="0"/>
+            <xs:element name="initialPropertyValues" type="propertyValuesType" minOccurs="0"/>
+
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+  <xs:complexType name="containerHandleType">
+		<xs:sequence>
+      <xs:element name="hostApplicationId" type="xs:string" minOccurs="0"/>
+			<xs:element name="type" type="containerTypeType"/>
+			<xs:element name="subType" type="xs:string" minOccurs="0"/>
+      <xs:element name="instanceId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:simpleType name="containerTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="JPD"/>
+			<xs:enumeration value="J2EEClient"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+  <xs:complexType name="messageType">
+		<xs:sequence>
+			<xs:element name="message" type="data"/>
+			<xs:element name="mime-type" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="propertyValuesType">
+    <xs:sequence>
+      <xs:element name="propertyValue" type="propertyValueType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="propertyValueType">
+    <xs:sequence>
+      <xs:element name="propertyName" type="xs:string"/>
+      <xs:element name="value" type="dataTypeSerializedValueType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dataTypeSerializedValueType">
+    <xs:sequence>
+	    <xs:element name="dataTypeName" type="xs:string"/>
+      <xs:element name="valueAsString" type="xs:string"/>
+	  </xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="data">
+    <xs:sequence>
+	    <xs:any namespace="##any" processContents="skip" minOccurs="1" maxOccurs="1"/>
+	  </xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="assigneeType">
+		<xs:sequence>
+			<xs:element name="user" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="group" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="algorithm" type="algorithmType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="assignmentInstructionsType">
+    <xs:sequence>
+      <xs:element name="assigneeList" type="assigneeListType" minOccurs="0"/>
+      <xs:element name="candidateListHandling" type="candidateListHandlingType" minOccurs="0"/>
+      <xs:element name="loadBalancingAvailabilityCheckEnabled" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assigneeListType">
+    <xs:sequence>
+      <xs:element name="assigneeDefinition" type="assigneeDefinitionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assigneeDefinitionType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="type" type="assigneeTypeType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="assigneeTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="User"/>
+			<xs:enumeration value="Group"/>
+			<xs:enumeration value="Rule"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+  <xs:simpleType name="candidateListHandlingType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="DEFAULT"/>
+			<xs:enumeration value="LOAD_BALANCING"/>
+      <xs:enumeration value="INTERACTIVE"/>
+      <xs:enumeration value="ITERATE_LIST"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="businessDateType">
+		<xs:sequence>
+			<xs:element name="month" type="xs:int" minOccurs="0"/>
+			<xs:element name="day" type="xs:int" minOccurs="0"/>
+			<xs:element name="hour" type="xs:int" minOccurs="0"/>
+			<xs:element name="min" type="xs:int" minOccurs="0"/>
+			<xs:element name="calendar" type="calendarType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="calendarType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="userOrGroup" type="xs:string"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:element name="TaskUpdateXML">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="comment" type="xs:string" minOccurs="0"/>
+				<xs:element name="priority" type="xs:int" minOccurs="0"/>
+				<xs:choice minOccurs="0">
+					<xs:element name="claimDueDate" type="xs:dateTime"/>
+					<xs:element name="claimDueBusinessDate" type="businessDateType"/>
+				</xs:choice>
+				<xs:choice minOccurs="0">
+					<xs:element name="completionDueDate" type="xs:dateTime"/>
+					<xs:element name="completionDueBusinessDate" type="businessDateType"/>
+				</xs:choice>
+				<xs:element name="owner" type="xs:string" minOccurs="0"/>
+				<xs:element name="canBeReassigned" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="canBeAborted" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="canBeReturned" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="assignee" type="assigneeType" minOccurs="0"/>
+				<xs:element name="request" type="messageType" minOccurs="0"/>
+				<xs:element name="response" type="messageType" minOccurs="0"/>
+
+        <!-- 9.0 Model Fields -->
+
+        <xs:choice minOccurs="0">
+					<xs:element name="currentStepCompletionDueDate" type="xs:dateTime"/>
+					<xs:element name="currentStepCompletionDueBusinessDate" type="businessDateType"/>
+				</xs:choice>
+				<xs:element name="taskTimeEstimate" type="xs:string" minOccurs="0"/>
+        <xs:element name="stepTimeEstimate" type="stepTimeEstimateType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="assignmentInstructions" type="assignmentInstructionsType" minOccurs="0"/>
+        <xs:element name="propertyValues" type="propertyValuesType" minOccurs="0"/>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+  <xs:simpleType name="stateType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="completed"/>
+			<xs:enumeration value="aborted"/>
+			<xs:enumeration value="suspended"/>
+			<xs:enumeration value="started"/>
+			<xs:enumeration value="claimed"/>
+			<xs:enumeration value="assigned"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="adminStateType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="COMPLETED"/>
+			<xs:enumeration value="ABORTED"/>
+			<xs:enumeration value="SUSPENDED"/>
+      <xs:enumeration value="ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="workingStateType">
+		<xs:restriction base="xs:string">
+      <xs:enumeration value="UNASSIGNED"/>
+      <xs:enumeration value="ASSIGNED"/>
+			<xs:enumeration value="CLAIMED"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+  <xs:element name="TaskInfoXML">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TaskInfoXMLType"/>
+      </xs:complexContent>
+    </xs:complexType>
+	</xs:element>
+
+  <xs:complexType name="TaskInfoXMLType">
+    <xs:sequence>
+      <xs:element name="taskId" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="comment" type="xs:string" minOccurs="0"/>
+      <xs:element name="priority" type="xs:int"/>
+      <xs:element name="claimDueDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="completionDueDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="creationDate" type="xs:dateTime"/>
+      <xs:element name="owner" type="xs:string"/>
+      <xs:element name="claimant" type="xs:string" minOccurs="0"/>
+      <xs:element name="canBeReassigned" type="xs:boolean"/>
+      <xs:element name="canBeAborted" type="xs:boolean"/>
+      <xs:element name="canBeReturned" type="xs:boolean"/>
+      <xs:element name="assignee" type="assigneeType" minOccurs="0"/>
+      <xs:element name="parentProcessUri" type="xs:string" minOccurs="0"/>
+      <xs:element name="parentProcessId" type="xs:string" minOccurs="0"/>
+      <xs:element name="state" type="stateType"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+      <xs:element name="responseType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="TaskDataXML">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TaskInfoXMLType">
+          <xs:sequence>
+            <!-- 9.0 Worklist Model fields -->
+            <xs:element name="taskPlanId" type="xs:string" minOccurs="0"/>
+            <xs:element name="creatingContainerHandle" type="containerHandleType" minOccurs="0"/>
+            <xs:element name="creationUser" type="xs:string" minOccurs="0"/>
+            <xs:element name="isOwnerGroup" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="lastUpdateDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="lastUpdateUser" type="xs:string" minOccurs="0"/>
+            <xs:element name="adminState" type="adminStateType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+            <xs:element name="workingState" type="workingStateType" minOccurs="0"/>
+            <xs:element name="currentStepName" type="xs:string" minOccurs="0"/>
+            <xs:element name="currentStepCompletionDueDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="constructorName" type="xs:string" minOccurs="0"/>
+            <xs:element name="finalStepName" type="xs:string" minOccurs="0"/>
+            <xs:element name="finalActionName" type="xs:string" minOccurs="0"/>
+            <xs:element name="taskTimeEstimate" type="xs:string" minOccurs="0"/>
+            <xs:element name="stepTimeEstimate" type="stepTimeEstimateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+	</xs:element>
+
+  <xs:complexType name="stepTimeEstimateType">
+    <xs:sequence>
+      <xs:element name="stepName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="interval" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+	<xs:simpleType name="algorithmType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ToUser"/>
+			<xs:enumeration value="ToUserInGroup"/>
+			<xs:enumeration value="ToUsersAndGroups"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+  <xs:element name="TaskEventMetadata">
+		<xs:complexType>
+			<xs:sequence>
+        <xs:element name="taskPlanId" type="xs:string"/>
+        <xs:element name="taskId" type="xs:string"/>
+        <xs:element name="eventType" type="xs:string"/>
+        <xs:element name="timestamp" type="xs:dateTime"/>
+        <xs:element name="currentStepName" type="xs:string"/>
+        <xs:element name="claimant" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="WorkSubstituteRules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="workSubstituteRule" type="WorkSubstituteRuleType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="WorkSubstituteRuleType">
+    <xs:sequence>
+      <xs:element name="workSubstituteRuleId" type="xs:string"/>
+      <xs:element name="effectiveDate" type="xs:dateTime"/>
+      <xs:element name="expiryDate" type="xs:dateTime"/>
+      <xs:element name="source" type="xs:string"/>
+      <xs:element name="target" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

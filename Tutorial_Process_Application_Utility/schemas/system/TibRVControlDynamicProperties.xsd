@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.bea.com/wli/control/TibRVControlDynamicProperties.xsd"
+	targetNamespace="http://www.bea.com/wli/control/TibRVControlDynamicProperties.xsd"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+    	<xs:element name="TibRVDynamicProperties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="service" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="network" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="daemon" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="useCM" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="cmName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ledgerName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="requestOld" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="syncLedger" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+        </xs:element>
+</xs:schema>

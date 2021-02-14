@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="AvailProcessorDefinitions" targetNamespace="http://www.openuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:s0="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:s1="http://www.openuri.org/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:partnerLinkType name="AvailProcessor_Callback">
+    <s0:role name="Service">
+      <s0:portType name="s1:AvailProcessor"/>
+    </s0:role>
+    <s0:role name="Callback">
+      <s0:portType name="s1:AvailProcessor_Callback"/>
+    </s0:role>
+  </s0:partnerLinkType>
+  <types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getAvail">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="itemID" type="xs:int"/>
+            <xs:element name="quantity" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAvailResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="avail">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="itemID" type="xs:int"/>
+            <xs:element name="qty" type="xs:int"/>
+            <xs:element name="avail" type="xs:boolean"/>
+            <xs:element name="date" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="getAvail">
+    <part element="s1:getAvail" name="parameters"/>
+  </message>
+  <message name="getAvailResponse">
+    <part element="s1:getAvailResponse" name="parameters"/>
+  </message>
+  <message name="avail">
+    <part element="s1:avail" name="parameters"/>
+  </message>
+  <portType name="AvailProcessor">
+    <operation name="getAvail" parameterOrder="parameters">
+      <input message="s1:getAvail"/>
+      <output message="s1:getAvailResponse"/>
+    </operation>
+  </portType>
+  <portType name="AvailProcessor_Callback">
+    <operation name="avail" parameterOrder="parameters">
+      <input message="s1:avail"/>
+    </operation>
+  </portType>
+  <binding name="AvailProcessorSoapBinding" type="s1:AvailProcessor">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getAvail">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <s2:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="AvailProcessor_CallbackServiceSoapBinding" type="s1:AvailProcessor_Callback">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="avail">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="AvailProcessor">
+    <port binding="s1:AvailProcessorSoapBinding" name="AvailProcessorSoapPort">
+      <s2:address location="http://localhost:7001/rqWeb/requestquote/services/AvailProcessor.jws"/>
+    </port>
+  </service>
+  <service name="AvailProcessor_CallbackService">
+    <port binding="s1:AvailProcessor_CallbackServiceSoapBinding" name="AvailProcessorSoapPortCallback"/>
+  </service>
+</definitions>

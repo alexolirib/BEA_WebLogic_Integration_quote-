@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://www.bea.com/wli/control/TibHeaders" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/wli/control/TibHeaders" elementFormDefault="qualified">
+    <xs:element name="TibHeaders">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReplySubject" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="SendSubject" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="TibrvTransport" type="Transport" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>    
+    
+        <xs:complexType name="Transport">
+                    <xs:sequence>    
+                    <xs:element name="Service" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="Network" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="Daemon" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                    </xs:sequence>
+        </xs:complexType>
+
+</xs:schema>

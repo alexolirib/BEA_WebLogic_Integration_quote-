@@ -1,0 +1,23 @@
+<?xml version="1.0"?> 
+<!--
+	 Validate.channel channel file 
+-	 Defines the Message Broker channels to which the RequestQuote and ValidateQuote
+     business processes publish and subscribe.  
+-	 xmlns:et="http://www.example.org/request references the QuoteRequest.xsd
+-    The data type of the messages routed by the ValidateOrder channel is 
+     typed-XML.
+-    The data type of the messages routed by the StopQuote channel is String.     
+--> 
+<channels channelPrefix="/TutorialPrefix"
+          xmlns="http://www.bea.com/wli/broker/channelfile" 
+		  xmlns:et="http://www.example.org/request">
+         	 
+	 <channel name ="Tutorial" messageType="none">
+     <channel messageType="xml" name="ValidateOrder"
+                  qualifiedMessageType="et:quoteRequest"/>          	 
+     
+     <channel messageType="string" name="StopQuote"/>
+                  
+    </channel>
+     
+</channels>

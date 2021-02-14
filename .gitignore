@@ -1,0 +1,13 @@
+.metadata
+Tutorial_Process_Application_Ear/.settings
+Tutorial_Process_Application_Utility/.apt_src
+Tutorial_Process_Application_Utility/.xbean_bin
+Tutorial_Process_Application_Utility/.xbean_src
+Tutorial_Process_Application_Utility/build/
+Tutorial_Process_Application_Utility/.settings
+Tutorial_Process_Application_Web/.apt_src
+Tutorial_Process_Application_Web/.xbean_bin
+Tutorial_Process_Application_Web/.xbean_src
+Tutorial_Process_Application_Web/.settings
+Tutorial_Process_Application_Web/build/
+Tutorial_Process_Application_Ear/build/

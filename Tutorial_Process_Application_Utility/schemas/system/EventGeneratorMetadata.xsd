@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://www.bea.com/wli/eventGenerator" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/wli/eventGenerator" elementFormDefault="qualified">
+    <xs:element name="FileEventGenerator">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Directory" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="FileName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="SourceConnFactoryJndiName" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="JmsEventGenerator">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="Value" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="JMSCorrelationID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSDeliveryMode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSDestination" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSExpiration" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSMessageID" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSPriority" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSRedelivered" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSReplyTo" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSTimestamp" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="JMSType" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="SourceType" type="xs:string"/>
+            <xs:attribute name="SourceJndiName" type="xs:string"/>
+            <xs:attribute name="SourceConnFactoryJndiName" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TimerEventGenerator">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="comment" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="timestamp" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="SourceConnFactoryJndiName" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EmailEventGenerator">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="From" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Subject" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Attachments" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Sent" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Received" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Headers-MessageID" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-Date" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-MimeVersion" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-ContentType" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:sequence>
+		        <xs:element name="Headers-Received" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+		<xs:element name="Headers-ReturnPath" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-DeliveredTo" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-From" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		<xs:element name="Headers-To" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="SourceConnFactoryJndiName" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

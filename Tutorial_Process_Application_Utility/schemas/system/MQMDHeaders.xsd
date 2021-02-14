@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://www.bea.com/wli/control/MQMDHeaders" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/wli/control/MQMDHeaders" elementFormDefault="qualified">
+    <xs:element name="MQMDHeaders">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MessageType" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="MessageId" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="CorrelationId" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="GroupMessage" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="GroupId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                		</xs:sequence>
+                        <xs:attribute name="waitForAllMsgs" type="xs:boolean" use="optional"/>
+                        <xs:attribute name="logicalOrder" type="xs:boolean" use="optional"/>
+                	</xs:complexType>
+                </xs:element>
+                <xs:element name="Priority" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Format" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="CharacterSet" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Persistence" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Segmentation" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Expiry" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="UserId" type="xs:string" minOccurs="0" maxOccurs="1"/>                
+                <xs:element name="MessageSequenceNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="GroupOptions" minOccurs="0" maxOccurs="1">
+                	<xs:complexType>
+                		<xs:sequence>
+                			<xs:element name="IsLastMessage" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+                		</xs:sequence>
+                	</xs:complexType>
+                </xs:element>
+                <xs:element name="ReportOptions" minOccurs="0" maxOccurs="1">
+                	<xs:complexType>
+                		<xs:sequence>
+                			<xs:element name="COA" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                			<xs:element name="COD" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                			<xs:element name="Exception" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                			<xs:element name="Expiration" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                		</xs:sequence>
+                	</xs:complexType>
+                </xs:element>       
+                <xs:element name="Feedback" type="xs:int" minOccurs="0" maxOccurs="1"/>                                         
+                <xs:element name="ReplyToQueueName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ReplyToQueueManager" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="WaitInterval" type="xs:string" minOccurs="0" maxOccurs="1"/>                
+                <xs:element name="ApplicationIdData" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ApplicationOriginData" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="PutApplType" type="xs:int" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="PutApplName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="PutDateTime" type="xs:string" minOccurs="0" maxOccurs="1"/>                
+                <xs:element name="AccountingToken" type="xs:base64Binary" minOccurs="0" maxOccurs="1"/>                
+                <xs:element name="Version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="MessageConsumption" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="MQGMO_CONVERT" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

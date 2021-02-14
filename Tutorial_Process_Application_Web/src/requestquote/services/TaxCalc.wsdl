@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="TaxCalcDefinitions" targetNamespace="http://www.openuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:s0="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:s1="http://www.openuri.org/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:partnerLinkType name="TaxCalc_Callback">
+    <s0:role name="Service">
+      <s0:portType name="s1:TaxCalc"/>
+    </s0:role>
+    <s0:role name="Callback">
+      <s0:portType name="s1:TaxCalc_Callback"/>
+    </s0:role>
+  </s0:partnerLinkType>
+  <types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="requestTaxRate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="stateID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="requestTaxRateResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnTaxRate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="taxRate" type="xs:float"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="requestTaxRate">
+    <part element="s1:requestTaxRate" name="parameters"/>
+  </message>
+  <message name="requestTaxRateResponse">
+    <part element="s1:requestTaxRateResponse" name="parameters"/>
+  </message>
+  <message name="returnTaxRate">
+    <part element="s1:returnTaxRate" name="parameters"/>
+  </message>
+  <portType name="TaxCalc">
+    <operation name="requestTaxRate" parameterOrder="parameters">
+      <input message="s1:requestTaxRate"/>
+      <output message="s1:requestTaxRateResponse"/>
+    </operation>
+  </portType>
+  <portType name="TaxCalc_Callback">
+    <operation name="returnTaxRate" parameterOrder="parameters">
+      <input message="s1:returnTaxRate"/>
+    </operation>
+  </portType>
+  <binding name="TaxCalcSoapBinding" type="s1:TaxCalc">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="requestTaxRate">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <s2:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="TaxCalc_CallbackServiceSoapBinding" type="s1:TaxCalc_Callback">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="returnTaxRate">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="TaxCalc">
+    <port binding="s1:TaxCalcSoapBinding" name="TaxCalcSoapPort">
+      <s2:address location="http://localhost:7001/rqWeb/requestquote/services/TaxCalc.jws"/>
+    </port>
+  </service>
+  <service name="TaxCalc_CallbackService">
+    <port binding="s1:TaxCalc_CallbackServiceSoapBinding" name="TaxCalcSoapPortCallback"/>
+  </service>
+</definitions>

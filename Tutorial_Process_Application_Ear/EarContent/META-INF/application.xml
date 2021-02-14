@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application id="Application_ID" version="1.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/application_1_4.xsd">
+	<display-name>
+	Tutorial_Process_Application_Ear</display-name>
+	<module id="WebModule_1613219725748">
+		<web>
+			<web-uri>Tutorial_Process_Application_Web.war</web-uri>
+			<context-root>Tutorial_Process_Application_Web</context-root>
+		</web>
+	</module>
+	<module>
+		<ejb>Tutorial_Process_Application_Web_WLI_ProjectBeans</ejb>
+	</module>
+	<module>
+		<ejb>Tutorial_Process_Application_Web_WLI_ComponentBeans</ejb>
+	</module>
+</application>

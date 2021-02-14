@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<xs:schema id="RosettaNetContext" targetNamespace="http://www.bea.com/wli/control/rosettanetContext"
+           xmlns="http://www.bea.com/wli/control/rosettanetContext"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="RosettaNetContext">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="pip" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="pip-version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-role" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to-role" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="failure-report-administrator" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="global-usage-code" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="debug-mode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="message-tracking-id" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="protocol-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="protocol-version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="conversation-id" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="process-instance-id" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="process-uri" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="business-action" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="document-datetimestamp" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="proprietary-identifier" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

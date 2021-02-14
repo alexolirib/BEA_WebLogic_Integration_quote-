@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<xs:schema id="DynamicProperties" targetNamespace="http://www.bea.com/wli/control/dynamicProperties"
+           xmlns="http://www.bea.com/wli/control/dynamicProperties"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="DynamicProperties">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element name="control">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="key" minOccurs="0" maxOccurs="unbounded" type="ControlPropertiesType"/>
+						</xs:sequence>
+                        <xs:attribute name="context-path" type="xs:string" />
+						<xs:attribute name="class-name" type="xs:string" />
+                        <xs:attribute name="controlType" type="control-type" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+    <xs:complexType name="ControlPropertiesType">
+        <xs:choice>
+            <xs:element ref="ServiceBrokerControlProperties" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="PublishControlProperties" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="JMSControlProperties" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="ProcessControlProperties" minOccurs="1" maxOccurs="1"/>
+        </xs:choice>
+        <xs:attribute name="value" type="xs:string" />
+    </xs:complexType>
+
+    <xs:element name="ServiceBrokerControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="endpoint" type="xs:string" minOccurs="0" maxOccurs="1" />
+                <xs:element name="protocol" type="protocol-type" minOccurs="0" maxOccurs="1" default="http-soap" />
+                <xs:choice minOccurs="0" >
+                    <xs:element name="clientCertificate">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="keyAlias" type="xs:string"/>
+                                <xs:element name="keyPassword" type="xs:string"/>
+                                <xs:element name="keystoreLocation" type="xs:string" minOccurs="0"/>
+                                <xs:element name="keystorePassword" type="xs:string" minOccurs="0"/>
+                                <xs:element name="keystoreType" type="xs:string" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="basicAuthentication">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="username" type="xs:string"/>
+                                <xs:element name="password" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:simpleType name="control-type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ServiceBrokerControl" />
+            <xs:enumeration value="ProcessControl" />
+            <xs:enumeration value="PublishControl" />
+            <xs:enumeration value="FileControl" />
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="protocol-type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="http-soap"/>
+            <xs:enumeration value="http-xml"/>
+            <xs:enumeration value="jms-soap"/>
+            <xs:enumeration value="jms-xml"/>
+            <xs:enumeration value="form-get"/>
+            <xs:enumeration value="form-post"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="PublishControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="channel-name" type="xs:string" minOccurs="0" maxOccurs="1" />
+                <xs:element name="message-metadata" type="metadata" minOccurs="0" maxOccurs="1" />
+                <xs:element name="queue-conn-factory" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="HttpControlProperties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="URLName" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+    </xs:element>
+
+    <xs:element name="FileControlProperties">      
+         <xs:complexType>   
+            <xs:sequence>
+                <xs:element name="directory-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="file-mask" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="suffix-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="suffix-type" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="create-mode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ftp-host-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ftp-user-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ftp-password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ftp-password-alias" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="ftp-local-directory" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+         </xs:complexType>      
+    </xs:element>
+
+    <xs:complexType name="FileControlFileInfo">
+            <xs:sequence>
+                <xs:element name="file-mask" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="directory-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:element name="JMSControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="Value" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="send-type" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="send-jndi-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="send-correlation-property" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="separate-transaction" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="jmscorrelationid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="jmstype" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="EmailControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="smtp-address" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-address" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="reply-to-address" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="reply-to-name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="header-encoding" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="password-alias" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <!-- The following complex-type represents any arbitrary sequence of XML content -->
+    <xs:complexType name="metadata">
+        <xs:sequence>
+            <xs:any namespace="##any" processContents="skip" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="ProcessControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="targetURI" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="queue-conn-factory" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="FileControlFileList">
+        <xs:complexType>
+            <xs:sequence>
+		<xs:element name="fileList" type="FileControlFileInfo" minOccurs="0"
+			maxOccurs="unbounded" />
+            </xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="EBXMLControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RosettaNetControlProperties">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="pip" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="pip-version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-role" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to-role" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="global-usage-code" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="business-activity-identifier" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-service" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to-service" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-supply-chain" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to-supply-chain" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="from-partner-classification-code" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="to-partner-classification-code" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="service-content-control-action-code" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="debug-mode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

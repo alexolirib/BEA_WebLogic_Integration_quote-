@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="PriceProcessorDefinitions" targetNamespace="http://www.openuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:s0="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:s1="http://www.openuri.org/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:partnerLinkType name="PriceProcessor_Callback">
+    <s0:role name="Service">
+      <s0:portType name="s1:PriceProcessor"/>
+    </s0:role>
+    <s0:role name="Callback">
+      <s0:portType name="s1:PriceProcessor_Callback"/>
+    </s0:role>
+  </s0:partnerLinkType>
+  <types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getPrice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="itemID" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPriceResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnPrice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="itemID" type="xs:int"/>
+            <xs:element name="price" type="xs:float"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="getPrice">
+    <part element="s1:getPrice" name="parameters"/>
+  </message>
+  <message name="getPriceResponse">
+    <part element="s1:getPriceResponse" name="parameters"/>
+  </message>
+  <message name="returnPrice">
+    <part element="s1:returnPrice" name="parameters"/>
+  </message>
+  <portType name="PriceProcessor">
+    <operation name="getPrice" parameterOrder="parameters">
+      <input message="s1:getPrice"/>
+      <output message="s1:getPriceResponse"/>
+    </operation>
+  </portType>
+  <portType name="PriceProcessor_Callback">
+    <operation name="returnPrice" parameterOrder="parameters">
+      <input message="s1:returnPrice"/>
+    </operation>
+  </portType>
+  <binding name="PriceProcessorSoapBinding" type="s1:PriceProcessor">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getPrice">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <s2:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="PriceProcessor_CallbackServiceSoapBinding" type="s1:PriceProcessor_Callback">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="returnPrice">
+      <s2:operation soapAction="" style="document"/>
+      <input>
+        <s2:body parts="parameters" use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="PriceProcessor">
+    <port binding="s1:PriceProcessorSoapBinding" name="PriceProcessorSoapPort">
+      <s2:address location="http://localhost:7001/rqWeb/requestquote/services/PriceProcessor.jws"/>
+    </port>
+  </service>
+  <service name="PriceProcessor_CallbackService">
+    <port binding="s1:PriceProcessor_CallbackServiceSoapBinding" name="PriceProcessorSoapPortCallback"/>
+  </service>
+</definitions>

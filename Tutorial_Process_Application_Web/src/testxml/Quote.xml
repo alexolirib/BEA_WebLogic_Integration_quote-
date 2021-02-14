@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<quot:quote xmlns:quot="http://www.example.org/quote">
+	<name>Acme Inc</name>
+	<address>12 Springs Rd, Morris Plains, NJ, 07960</address>
+	<quoteResponse>
+		<widgetId>12</widgetId>
+		<unitPrice>1.00</unitPrice>
+		<requestedQuantity>10</requestedQuantity>
+		<fillOrder>true</fillOrder>
+		<shipDate>2002-03-22</shipDate>	
+		<taxRate>.0800</taxRate>
+		<totalCost>10.8</totalCost>
+	</quoteResponse>
+	<quoteResponse>
+		<widgetId>134</widgetId>
+		<requestedQuantity>345</requestedQuantity>
+		<fillOrder>false</fillOrder>	
+	</quoteResponse>
+	<quoteResponse>
+		<widgetId>211</widgetId>
+		<unitPrice>10.00</unitPrice>
+		<requestedQuantity>100</requestedQuantity>
+		<fillOrder>true</fillOrder>
+		<shipDate>2002-04-21</shipDate>	
+		<taxRate>.0800</taxRate>
+		<totalCost>1080</totalCost>
+	</quoteResponse>
+</quot:quote>
+

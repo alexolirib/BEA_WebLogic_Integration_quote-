@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<quoteRequest xmlns="http://www.example.org/request">
+	<customerName>Acme Inc</customerName>
+	<shipAddress street="12 Springs Rd" city="Morris Plains" state="NJ" zip="07960"/>
+	<widgetRequest>
+		<widgetId>12</widgetId>
+		<quantity>500</quantity>			
+	</widgetRequest>
+	<widgetRequest>
+		<widgetId>134</widgetId>
+		<quantity>345</quantity>
+	</widgetRequest>
+	<widgetRequest>
+		<widgetId>211</widgetId>
+		<quantity>100</quantity>
+	</widgetRequest>						
+</quoteRequest>
